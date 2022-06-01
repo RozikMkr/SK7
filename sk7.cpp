@@ -1,85 +1,101 @@
 #include <iostream>
+#include <string.h>
 using namespace std;
 
-class input {
-public :
-void in(int a);
-void sorting(int a);
-void tukar(int a,int b);
-void cari(int a);
-void tampil(int a);
-
-private:
-  char id[10]; 
-  char nama[20];
-  int stokbrg[20];
-  
-  bool ketemu;
+class Toko{
+   public:
+      void data();
 };
 
-void input::in(int n){
-  
+typedef struct{
+	int kode, stok;
+	char nama[10];
+}
+   brg;
+   brg barang[5];
+   brg lok[5];
+   brg temp;
+   int n, i, b, j, cari, ada;
 
-  for(int i=0;i<n;i++){
-    cout<<"Masukkan id barang : "; cin>>id[i];
-    cout<<"Masukkan nama barang : "; cin>>nama[i];
-    cout<<"Masukkan jumlah stok barang : ";cin>>stokbrg[i];
-  }   
-}
-void input::tukar(int a,int b){
-	int t,u,m;
-    t=stokbrg[b];
-    stokbrg[b]=stokbrg[a];
-    stokbrg[a]=t;
-    
-    u=id[b];
-    id[b]=id[a];
-    id[a]=u;
-    
-    m=nama[b];
-    nama[b]=nama[a];
-    nama[a]=m;
-}
-void input::sorting(int n){
-   for(int c=1;c<n;c++)
-    {
-        for(int d=0;d<n-c;d++)
-        {
-            if(stokbrg[d]<stokbrg[d+1]){
-            	tukar(d,d+1);
-			}
-	}
-}
-tampil(n);
-}
-void input::tampil(int n){
-	for (int i=0;i<n;i++){
-	     cout<<"["<<id[i]<<"] ";
-	     cout<<"["<<nama[i]<<"] ";
-	     cout<<"["<<stokbrg[i]<<"] ";
-	}
-}
-
-void input::cari(int n){
-	char cari;
-	cout << "masukan id barang :";
-	cin >> cari;
-	for (int i=0;i<=n;i++){
-		if(id[i]==cari){
-			cout << "nama barang :"<< nama[i] <<endl;
-			cout << "id barang :"<< id[i]<<endl;
-			cout << "stok barang :"<< stokbrg[i]<<endl;
-		}
-	}
+void Toko::data(){
 	
-}
+	cout<<">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"<<endl;
+	cout<<">>                       TOKO KELONTONG                          <<"<<endl;
+	cout<<">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"<<endl<<endl;
 
+	cout<<"Masukan banyak barang = ";
+	cin>>n;
+
+	for(i=0;i<n;i++){
+	    cout<<endl;
+	    cout<<"Barang ke-"<<(i+1)<<":"<<endl;
+	    cout<<"Masukan id Barang    : ";cin>>barang[i].kode;
+	    cout<<"Masukan Nama Barang  : ";cin>>(barang[i].nama);
+	    cout<<"Masukan Stock Barang : ";cin>>barang[i].stok;
+	    }
+		cout<<endl;
+	    cout<<"Data Barang Anda"<<endl<<endl;
+	    cout<<">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"<<endl;
+	    cout<<"|   id Barang  |  Nama Barang  | Stock Barang | "<<endl;
+	    cout<<">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"<<endl;
+
+	    for(i=0;i<n;i++){
+	    	cout<<"|      "<<barang[i].kode<<"\t\t"<<barang[i].nama<<"\t\t"<<barang[i].stok<<"     |"<<endl;
+	        }
+        cout<<endl;
+cout<<">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"<<endl;
+
+          for(i=0;i<n;i++){
+             for(j=0;j<n-1;j++){
+                if(barang[j].stok < barang[j+1].stok){
+                	temp.kode=barang[j].kode;
+                    barang[j].kode=barang[j+1].kode;
+                    barang[j+1].kode=temp.kode;
+	
+		          	strcpy(temp.nama,barang[j].nama);
+		          	strcpy(barang[j].nama,barang[j+1].nama);
+		          	strcpy(barang[j+1].nama,temp.nama);
+
+                	temp.stok=barang[j].stok;
+                	barang[j].stok=barang[j+1].stok;
+                	barang[j+1].stok=temp.stok;
+                    }
+                  }
+               }
+               cout<<endl;
+        cout<<endl;
+
+        cout<<"Setelah data diurutkan berdasarkan kode terbesar : "<<endl;
+        cout<<">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"<<endl;
+        cout<<"|  id Barang  |  Nama Barang  |  Stock Barang  | "<<endl;
+        cout<<">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"<<endl;
+        for(j=0; j<n; j++){
+            cout<<"|       "<<barang[j].kode<<"\t\t"<<barang[j].nama<<"\t\t"<<barang[j].stok<<"     |"<<endl;
+        }
+
+        cout<<">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"<<endl;
+        cout<<endl;
+        cout<<"Masukan id Barang Untuk Mencari : ";
+        cin>>cari;
+        ada = 0;
+        for(j=0; j<n; j++){
+            if(barang[j].kode==cari){
+                    ada=1;
+                    
+					cout<<endl;
+                    cout<<">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"<<endl;
+                    cout<<"|      id Barang   |  Nama Barang   |       Stock Barang    |    "<<endl;
+                    cout<<">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"<<endl;
+                    cout<<"|         "<<barang[j].kode<<"\t\t  "<<barang[j].nama<<"\t\t     "<<barang[j].stok<<"\t\t "<<"|"<<endl;
+                }
+            }
+            cout<<">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"<<endl;
+	if (ada == 0){
+		cout<<"Data Tidak ditemukan"<<endl;
+	}	
+}
 int main(){
-	int n;
-	cout<<"Masukan Jumlah Data = ";
-  cin>>n;
-	input x;
-	x.in(n);
-	x.sorting(n);
-	x.cari(n);
+   Toko kelontong;
+   kelontong.data();
+   return 0;
 }
